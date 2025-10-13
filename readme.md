@@ -90,15 +90,7 @@ Each book folder follows a consistent structure:
 - ✅ Build confidence with async Rust and concurrency
 - ✅ Explore unsafe Rust and FFI when necessary
 
-### Project Milestones
-
-- [ ] Build a complete CLI application
-- [ ] Create an async web service
-- [ ] Contribute to an open-source Rust project
-- [ ] Implement a non-trivial data structure from scratch
-- [ ] Build a project using WebAssembly
-
----
+----
 
 ## 🚀 Running Code
 
@@ -137,7 +129,7 @@ cargo test
 
 ## 📝 Notes & Insights
 
-As I progress, I'll document key learnings, "aha moments," and challenging concepts in each book's README and notes folder. This helps reinforce understanding and creates a personal reference guide.
+As I progress, I'll document key learnings, "aha moments," and challenging concepts in each book's README. This helps reinforce understanding and creates a personal reference guide.
 
 ### Key Concepts I'm Tracking
 
