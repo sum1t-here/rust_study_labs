@@ -17,9 +17,7 @@ The definitive guide to Rust by Steve Klabnik and Carol Nichols. Covers everythi
 ```
 the-rust-programming-language/
 ├── chapters/          # Chapter-by-chapter code
-├── examples/          # Worked examples
-├── exercises/         # My solutions
-├── projects/          # Major projects (guessing game, minigrep, web server)
+├── exercises/         # My solutions from Rustling
 └── README.md
 ```
 
@@ -38,12 +36,12 @@ the-rust-programming-language/
 - [x] **Ch 6**: Enums and Pattern Matching
 
 ### Part 3: Core Concepts
-- [ ] **Ch 7**: Managing Projects (modules, packages, crates)
-- [ ] **Ch 8**: Collections (vectors, strings, hash maps)
-- [ ] **Ch 9**: Error Handling ⭐ (`panic!`, `Result`)
-- [ ] **Ch 10**: Generics, Traits, Lifetimes ⭐
-- [ ] **Ch 11**: Testing
-- [ ] **Ch 12**: CLI Project (minigrep)
+- [x] **Ch 7**: Managing Projects (modules, packages, crates)
+- [x] **Ch 8**: Collections (vectors, strings, hash maps)
+- [x] **Ch 9**: Error Handling ⭐ (`panic!`, `Result`)
+- [x] **Ch 10**: Generics, Traits, Lifetimes ⭐
+- [x] **Ch 11**: Testing
+- [x] **Ch 12**: CLI Project (minigrep)
 
 ### Part 4: Advanced Thinking
 - [ ] **Ch 13**: Functional Features (closures, iterators)

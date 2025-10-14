@@ -299,6 +299,15 @@ fn main() {
 }
 ```
 
+**Slicing Array Elements:**
+```rust
+let a = [1, 2, 3, 4, 5];
+// upper idx 4 is excluded
+let nice_slice = &a[1..4];
+// The upper index can be included by using the syntax `..=` (with `=` sign)
+let nice_slice = &a[1..=3];
+```
+
 **When to Use Arrays vs Vectors:**
 - Use **arrays** when you know the number of elements won't change
 - Use **vectors** (covered later) when you need a growable collection
