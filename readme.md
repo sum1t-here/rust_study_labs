@@ -28,13 +28,11 @@ rust-learning/
 ├── books/
 │   ├── the-rust-programming-language/
 │   │   ├── chapters/       # Chapter-by-chapter code
-│   │   ├── examples/       # Worked examples from the book
-│   │   ├── exercises/      # My solutions to exercises
+│   │   ├── examples/       # Worked examples from the rustlings
 │   │   └── README.md       # Progress tracker for this book
 │   │
 │   ├── rust-by-example/
 │   │   ├── examples/       # Code examples from RBE
-│   │   ├── notes/          # Personal notes and insights
 │   │   └── README.md       # Progress and notes
 │   │
 │   ├── async-rust/
@@ -44,6 +42,7 @@ rust-learning/
 │   │
 │   └── ...                 # Additional books as I progress
 │
+├── NOTES.md                # Notes and Insights
 └── README.md               # This file
 ```
 
