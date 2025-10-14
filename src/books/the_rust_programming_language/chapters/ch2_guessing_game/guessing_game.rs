@@ -1,5 +1,5 @@
-use std::{ cmp::Ordering, io };
 use rand::Rng;
+use std::{cmp::Ordering, io};
 
 pub fn guess() {
     println!("Guess the number!");
@@ -14,7 +14,9 @@ pub fn guess() {
 
         let mut guess = String::new();
 
-        io::stdin().read_line(&mut guess).expect("Failed to read line");
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
 
         println!("You guessed: {guess}");
 

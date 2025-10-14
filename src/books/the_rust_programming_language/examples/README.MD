@@ -17,17 +17,17 @@ Rust By Example (RBE) teaches Rust through executable code examples. This folder
 ## 📚 Topics
 
 ### Basics
-- [.] Hello World
-- [ ] Primitives (literals, tuples, arrays)
-- [ ] Custom Types (structs, enums)
-- [ ] Variable Bindings
-- [ ] Types (casting, literals, inference, aliasing)
-- [ ] Conversion (From/Into, TryFrom/TryInto, ToString, parsing)
+- [x] Hello World
+- [x] Primitives (literals, tuples, arrays)
+- [x] Custom Types (structs, enums)
+- [x] Variable Bindings
+- [x] Types (casting, literals, inference, aliasing)
+- [x] Conversion (From/Into, TryFrom/TryInto, ToString, parsing)
 
 ### Control Flow
-- [ ] if/else
-- [ ] loop, while, for
-- [ ] match, if let, while let
+- [x] if/else
+- [x] loop, while, for
+- [x] match, if let, while let
 
 ### Functions
 - [ ] Methods

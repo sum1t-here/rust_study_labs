@@ -28,14 +28,14 @@ the-rust-programming-language/
 ## 📚 Progress
 
 ### Part 1: Getting Started
-- [.] **Ch 1**: Getting Started
-- [.] **Ch 2**: Guessing Game Project
+- [x] **Ch 1**: Getting Started
+- [x] **Ch 2**: Guessing Game Project
 
 ### Part 2: Fundamentals
-- [.] **Ch 3**: Common Concepts (variables, types, functions, control flow)
-- [.] **Ch 4**: Ownership ⭐ (ownership, borrowing, slices)
-- [.] **Ch 5**: Structs
-- [.] **Ch 6**: Enums and Pattern Matching
+- [x] **Ch 3**: Common Concepts (variables, types, functions, control flow)
+- [x] **Ch 4**: Ownership ⭐ (ownership, borrowing, slices)
+- [x] **Ch 5**: Structs
+- [x] **Ch 6**: Enums and Pattern Matching
 
 ### Part 3: Core Concepts
 - [ ] **Ch 7**: Managing Projects (modules, packages, crates)

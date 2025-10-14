@@ -47,28 +47,28 @@ rustlings verify
 ## 📚 Exercise Categories
 
 ### Intro
-- [ ] intro1
-- [ ] intro2
+- [x] intro1
+- [x] intro2
 
 ### Variables
-- [ ] variables1 - Create a variable
-- [ ] variables2 - Assign a value
-- [ ] variables3 - Make it compile
-- [ ] variables4 - Mutability
-- [ ] variables5 - Shadowing
-- [ ] variables6 - Constants
+- [x] variables1 - Create a variable
+- [x] variables2 - Assign a value
+- [x] variables3 - Make it compile
+- [x] variables4 - Mutability
+- [x] variables5 - Shadowing
+- [x] variables6 - Constants
 
 ### Functions
-- [ ] functions1 - Define a function
-- [ ] functions2 - Function parameters
-- [ ] functions3 - Function return values
-- [ ] functions4 - Multiple parameters
-- [ ] functions5 - Return statements
+- [x] functions1 - Define a function
+- [x] functions2 - Function parameters
+- [x] functions3 - Function return values
+- [x] functions4 - Multiple parameters
+- [x] functions5 - Return statements
 
 ### If
-- [ ] if1 - Basic if/else
-- [ ] if2 - else if
-- [ ] if3 - if let
+- [x] if1 - Basic if/else
+- [x] if2 - else if
+- [x] if3 - if let
 
 ### Primitive Types
 - [ ] primitive_types1 - Booleans
@@ -193,19 +193,6 @@ rustlings verify
 
 ---
 
-
-## 💡 Key Learnings
-
-### Ownership & Borrowing
-*Insights from move_semantics exercises*
-
-### Error Handling
-*Patterns learned from error exercises*
-
-### Traits & Generics
-*Understanding trait bounds and generic constraints*
-
----
 
 
 

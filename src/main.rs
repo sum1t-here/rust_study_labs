@@ -9,7 +9,8 @@ fn main() {
     // -------------------------------
 
     // books::the_rust_programming_language::chapters::ch1_getting_started::hello_world::run();
-    books::the_rust_programming_language::chapters::ch2_guessing_game::guessing_game::guess();
+    // books::the_rust_programming_language::chapters::ch2_guessing_game::guessing_game::guess();
+    books::the_rust_programming_language::chapters::ch3_common_concepts::var_mut::run();
 
     // -------------------------------
     // RUSTLINGS
