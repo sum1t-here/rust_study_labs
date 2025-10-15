@@ -516,6 +516,176 @@ fn main() {
 // LIFTOFF!!!
 ```
 
+#### Rust Ownership
+
+# Rust Ownership Quick Reference
+
+## Core Concepts
+
+### Stack vs Heap
+- **Stack**: Fast LIFO storage for fixed-size data (integers, booleans, etc.)
+- **Heap**: Slower storage for variable-size data (String, Vec, etc.) - returns a pointer
+
+### The Three Ownership Rules
+1. Each value has exactly **one owner**
+2. Only **one owner** at a time
+3. When owner goes **out of scope**, value is **dropped** (memory freed)
+
+---
+
+## Key Operations
+
+### Move (Default Behavior)
+```rust
+let s1 = String::from("hello");
+let s2 = s1;  // s1 is MOVED to s2
+// println!("{}", s1); // ❌ ERROR: s1 no longer valid
+```
+- Transfers ownership from `s1` to `s2`
+- Only the stack data (pointer, length, capacity) is copied
+- Heap data is NOT duplicated
+- `s1` becomes invalid to prevent double-free errors
+
+### Clone (Explicit Deep Copy)
+```rust
+let s1 = String::from("hello");
+let s2 = s1.clone();  // Deep copy of heap data
+println!("{} {}", s1, s2); // ✅ Both valid
+```
+- Creates a full copy of both stack AND heap data
+- Expensive operation - use sparingly
+- Both variables remain valid
+
+### Clear (Mutation)
+```rust
+let mut s = String::from("hello");
+s.clear();  // Empties the string, s = ""
+```
+- Requires mutable reference (`mut`)
+- Modifies existing data without transferring ownership
+- The variable remains valid but empty
+
+---
+
+## Borrowing (References)
+
+### Immutable References (`&T`)
+```rust
+let s1 = String::from("hello");
+print_length(&s1);  // Borrows without taking ownership
+println!("{}", s1); // ✅ s1 still valid
+```
+- Read-only access
+- Can have **multiple** immutable references simultaneously
+- Original owner retains ownership
+
+### Mutable References (`&mut T`)
+```rust
+let mut s = String::from("hello");
+change(&mut s);
+```
+- Allows modification
+- Can have **only ONE** mutable reference at a time
+- Cannot mix mutable and immutable references
+
+### Reference Rules
+1. Either **one mutable** reference OR **any number of immutable** references
+2. References must **always be valid** (no dangling pointers)
+
+---
+
+## String Slices (`&str`)
+
+```rust
+let s = String::from("hello world");
+let hello = &s[0..5];   // "hello"
+let world = &s[6..11];  // "world"
+let whole = &s[..];     // "hello world"
+```
+
+- A reference to part of a String
+- Type: `&str` (immutable reference)
+- Does NOT take ownership
+- Syntax: `&s[start..end]` or `&s[..]` for full string
+
+### Why Slices Matter
+```rust
+let mut s = String::from("hello");
+let word = &s[0..5];
+// s.clear(); // ❌ ERROR: can't mutate while immutable borrow exists
+println!("{}", word);
+```
+- Slices prevent unsafe mutations
+- Compiler enforces that data can't change while borrowed
+
+---
+
+## Quick Decision Chart
+
+**Need to use value in multiple places?**
+- Stack types (i32, bool, etc.) → Auto-copied ✓
+- Heap types (String, Vec) → Use references `&` or `.clone()`
+
+**Need to modify data?**
+- Own it → Use `let mut` and modify directly
+- Borrow it → Use `&mut` reference
+
+**Passing to functions?**
+- Don't need it after → Move (default)
+- Still need it → Borrow with `&`
+
+---
+
+## Common Patterns
+
+```rust
+// ✅ Multiple reads
+let s = String::from("data");
+read(&s);
+read(&s);
+println!("{}", s);
+
+// ✅ Single mutation
+let mut s = String::from("data");
+modify(&mut s);
+println!("{}", s);
+
+// ❌ Can't do both
+let mut s = String::from("data");
+let r1 = &s;
+// let r2 = &mut s; // ERROR: already borrowed as immutable
+```
+
+---
+
+## Memory Model
+
+```
+Stack (fast, fixed-size):
+┌─────────┬────────┬──────────┐
+│ pointer │ length │ capacity │  → This is what gets copied on move
+└────┬────┴────────┴──────────┘
+     │
+     ↓
+Heap (slower, variable-size):
+┌───┬───┬───┬───┬───┐
+│ h │ e │ l │ l │ o │  → Actual string data (expensive to copy)
+└───┴───┴───┴───┴───┘
+```
+
+When you **move**: Only stack data is copied (cheap)  
+When you **clone**: Stack + heap data is copied (expensive)  
+When you **borrow**: Nothing is copied, just a reference (cheapest)
+
+---
+
+## Key Takeaways
+- Ownership prevents memory bugs at compile time
+- Move is default for heap types (no copy)
+- Use `&` to borrow without taking ownership
+- Use `.clone()` when you explicitly need a copy
+- Slices (`&str`) are safe views into data
+
 ---
 
 *More chapters and notes will be added as I progress through the book...*
