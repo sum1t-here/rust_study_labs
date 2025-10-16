@@ -11,8 +11,10 @@ fn main() {
     // books::the_rust_programming_language::chapters::ch1_getting_started::hello_world::run();
     // books::the_rust_programming_language::chapters::ch2_guessing_game::guessing_game::guess();
     // books::the_rust_programming_language::chapters::ch3_common_concepts::var_mut::run();
-    books::the_rust_programming_language::chapters::ch4_ownership::run();
-    books::the_rust_programming_language::chapters::ch4_ownership::run3();
+    // books::the_rust_programming_language::chapters::ch4_ownership::run();
+    // books::the_rust_programming_language::chapters::ch4_ownership::run3();
+    // books::the_rust_programming_language::chapters::ch5_structs_and_methods::run();
+    books::the_rust_programming_language::chapters::ch6_enum_and_patternmatching::run();
 
     // -------------------------------
     // RUSTLINGS

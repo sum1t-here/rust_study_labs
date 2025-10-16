@@ -4,9 +4,9 @@ Comprehensive notes, key concepts, and important takeaways
 
 ---
 
-### Variables and Mutability
+# Variables and Mutability
 
-#### Shadowing
+## Shadowing
 
 **Definition:** Shadowing in Rust means redeclaring a variable with the same name, allowing you to change its value or even its type while keeping the same variable name in scope.
 
@@ -45,7 +45,7 @@ spaces = spaces.len();  // compile error - type mismatch!
 
 ---
 
-### Data Types
+# Data Types
 
 > **Important:** Rust is a **statically typed** language, which means that it must know the types of all variables at compile time.
 
@@ -53,7 +53,7 @@ Every value in Rust has a specific data type that tells Rust what kind of data i
 
 ---
 
-#### Scalar Types
+## Scalar Types
 
 Scalar types represent a single value. Rust has four primary scalar types:
 
@@ -64,7 +64,7 @@ Scalar types represent a single value. Rust has four primary scalar types:
 
 ---
 
-##### 1. Integer Types
+### 1. Integer Types
 
 An integer is a number without a fractional component.
 
@@ -112,7 +112,7 @@ let byte = b'A';
 
 ---
 
-##### 2. Floating-Point Types
+### 2. Floating-Point Types
 
 Rust has two primitive floating-point types for numbers with decimal points:
 
@@ -136,7 +136,7 @@ fn main() {
 
 ---
 
-##### 3. The Boolean Type
+### 3. The Boolean Type
 
 Boolean type has two possible values: `true` and `false`.
 
@@ -155,7 +155,7 @@ fn main() {
 
 ---
 
-##### 4. The Character Type
+### 4. The Character Type
 
 Rust's `char` type represents a Unicode Scalar Value.
 
@@ -175,7 +175,7 @@ fn main() {
 
 ---
 
-#### Compound Types
+## Compound Types
 
 Compound types can group multiple values into one type. Rust has two primitive compound types:
 
@@ -184,7 +184,7 @@ Compound types can group multiple values into one type. Rust has two primitive c
 
 ---
 
-##### 1. The Tuple Type
+### 1. The Tuple Type
 
 **Definition:** A tuple is a way of grouping together a number of values with a variety of types into one compound type.
 
@@ -245,7 +245,7 @@ let unit = ();  // unit value and unit type
 
 ---
 
-##### 2. The Array Type
+### 2. The Array Type
 
 **Definition:** An array is a collection of multiple values of the **same type**.
 
@@ -313,7 +313,7 @@ let nice_slice = &a[1..=3];
 - Use **vectors** (covered later) when you need a growable collection
 
 ---
-### Functions
+# Functions
 
 *Syntax*
 ```rust
@@ -328,7 +328,7 @@ fn another_function() {
 }
 ```
 
-#### Parameters
+## Parameters
 ```rust
 fn main() {
     another_function(5);
@@ -339,7 +339,7 @@ fn another_function(x: i32) {
 }
 ```
 
-#### Statements and Expressions
+## Statements and Expressions
 
 Function bodies are made up of a series of statements optionally ending in an expression.
 
@@ -369,7 +369,7 @@ This expression:
 
 is a block that, in this case, evaluates to 4. That value gets bound to y as part of the let statement. Note that the x + 1 line *doesn’t have a semicolon at the end*, which is unlike most of the lines you’ve seen so far. *Expressions do not include ending semicolons*. If you add a semicolon to the end of an expression, you turn it into a statement, and it will then not return a value.
 
-#### Functions with return values
+## Functions with return values
 
 ```rust
 fn five() -> i32 {
@@ -383,9 +383,9 @@ fn main() {
 }
 ```
 
-### Control Flow
+# Control Flow
 
-#### if Expressions
+## if Expressions
 
 ```rust
 fn main() {
@@ -424,11 +424,11 @@ fn main() {
 }
 ```
 
-### Repetition with Loops
+## Repetition with Loops
 
 Rust has three kinds of loops: loop, while, and for. Let’s try each one.
 
-#### Repeating Code with loop
+### Repeating Code with *loop*
 
 ```rust
 fn main() {
@@ -439,7 +439,7 @@ fn main() {
 ```
 *When we run this program, we’ll see again! printed over and over continuously until we stop the program manually.*
 
-#### Loop Labels to Disambiguate Between Multiple Loops
+### Loop Labels to Disambiguate Between Multiple Loops
 ```rust
 fn main() {
     let mut count = 0;
@@ -464,7 +464,7 @@ fn main() {
 }
 ```
 
-#### Conditional Loops with while
+### Conditional Loops with while
 ```rust
 fn main() {
     let mut number = 3;
@@ -479,7 +479,7 @@ fn main() {
 }
 ```
 
-#### Looping Through a Collection
+### Looping Through a Collection
 ```rust
 fn main() {
     let a = [10, 20, 30, 40, 50];
@@ -515,18 +515,13 @@ fn main() {
 // 1!
 // LIFTOFF!!!
 ```
+# Rust Ownership
 
-#### Rust Ownership
-
-# Rust Ownership Quick Reference
-
-## Core Concepts
-
-### Stack vs Heap
+## Stack vs Heap
 - **Stack**: Fast LIFO storage for fixed-size data (integers, booleans, etc.)
 - **Heap**: Slower storage for variable-size data (String, Vec, etc.) - returns a pointer
 
-### The Three Ownership Rules
+## The Three Ownership Rules
 1. Each value has exactly **one owner**
 2. Only **one owner** at a time
 3. When owner goes **out of scope**, value is **dropped** (memory freed)
@@ -685,6 +680,80 @@ When you **borrow**: Nothing is copied, just a reference (cheapest)
 - Use `&` to borrow without taking ownership
 - Use `.clone()` when you explicitly need a copy
 - Slices (`&str`) are safe views into data
+
+---
+
+# Rust Structs
+
+## Basic Struct Definition
+```rust
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+```
+
+## Debug Printing
+- `#[derive(Debug)]` - Auto-generates debug formatting
+- `{:?}` - Compact debug print
+- `{:#?}` - Pretty debug print
+- `dbg!(&user)` - Prints value with file/line info (use `&` to avoid moving ownership)
+
+## Display Trait
+Must implement `fmt::Display` manually to use `{}` formatting:
+```rust
+impl fmt::Display for User {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "Hello, {}. Active: {}", self.username, self.active)
+    }
+}
+```
+
+## Struct Update Syntax
+```rust
+let user2 = User {
+    email: String::from("new@test.com"),
+    ..user1  // Copy remaining fields from user1
+};
+```
+
+## Tuple Structs
+```rust
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+// Same types but different struct names = different types
+```
+
+## Methods vs Associated Functions
+```rust
+impl Rectangle {
+    // Method (takes &self)
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+    
+    // Associated function (no self) - like a constructor
+    fn square(size: u32) -> Self {
+        Self { width: size, height: size }
+    }
+}
+```
+
+## Key Differences
+- **Method**: Has `&self` parameter, called with dot notation: `rect.area()`
+- **Associated Function**: No `self`, called with `::`: `Rectangle::square(10)`
+
+## Borrowing Best Practices
+- Use `&Rectangle` instead of `Rectangle` in functions to:
+  - Avoid taking ownership
+  - Avoid copying large structs
+  - Maintain read-only access
+
+## Ownership Notes
+- Use `String` instead of `&str` in structs to avoid lifetime issues
+- `&str` requires lifetime specifiers (borrowed data must not outlive the struct)
 
 ---
 

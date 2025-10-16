@@ -2,3 +2,5 @@ pub mod ch1_getting_started;
 pub mod ch2_guessing_game;
 pub mod ch3_common_concepts;
 pub mod ch4_ownership;
+pub mod ch5_structs_and_methods;
+pub mod ch6_enum_and_patternmatching;
