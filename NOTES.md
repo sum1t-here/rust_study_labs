@@ -755,6 +755,105 @@ impl Rectangle {
 - Use `String` instead of `&str` in structs to avoid lifetime issues
 - `&str` requires lifetime specifiers (borrowed data must not outlive the struct)
 
+# Rust Enums
+
+## Basic Enum with Data
+```rust
+enum IpAddr {
+    V4(u8, u8, u8, u8),
+    V6(String),
+}
+
+let home = IpAddr::V4(127, 0, 0, 1);
+let loopback = IpAddr::V6(String::from("::1"));
+```
+- Enums can hold data directly in variants
+- Each variant can have different types and amounts of data
+
+## Option<T> - Safe Null Alternative
+```rust
+enum Option<T> {
+    Some(T),  // Value exists
+    None,     // Value is absent
+}
+```
+
+### Benefits
+- **No null pointer errors** - forces explicit handling of missing values
+- **Compile-time safety** - must handle both `Some` and `None` cases
+- **Clear intent** - makes optional values explicit in function signatures
+
+### Common Methods
+```rust
+let user = find_user(1);
+
+// Method 1: match
+match user {
+    Some(name) => println!("Found: {}", name),
+    None => println!("Not found"),
+}
+
+// Method 2: unwrap_or (provides default)
+let name = find_user(2).unwrap_or(String::from("Guest"));
+```
+
+## Pattern Matching with match
+```rust
+fn value_in_cents(coin: &Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+```
+- Must be **exhaustive** - all cases must be handled
+- Returns a value from each arm
+
+## if let - Syntactic Sugar
+Use when you only care about **one specific pattern**:
+
+```rust
+// Verbose match
+match config_max {
+    Some(max) => println!("Max: {max}"),
+    _ => (),  // Required boilerplate
+}
+
+// Concise if let
+if let Some(max) = config_max {
+    println!("Max: {max}");
+}
+```
+
+### With else
+```rust
+if let Coin::Quarter = coin {
+    println!("Quarter");
+} else {
+    count += 1;  // All other coins
+}
+```
+
+## let-else Pattern (Early Return)
+```rust
+fn describe_cents(coin: Coin) -> Option<String> {
+    let Coin::Quarter = coin else {
+        return None;  // Exit early if not Quarter
+    };
+    Some(format!("Quarter it is"))
+}
+```
+- Useful for **guard clauses** and early returns
+- Cleaner than nested if statements
+
+## Key Takeaways
+- **Enums over structs** when variants are mutually exclusive
+- **Option<T>** is Rust's safe replacement for null
+- **match** for exhaustive pattern matching
+- **if let** for single-pattern matching
+- **let-else** for early-return guard patterns
 ---
 
 *More chapters and notes will be added as I progress through the book...*
