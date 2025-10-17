@@ -15,7 +15,7 @@ fn main() {
     // books::the_rust_programming_language::chapters::ch4_ownership::run3();
     // books::the_rust_programming_language::chapters::ch5_structs_and_methods::run();
     // books::the_rust_programming_language::chapters::ch6_enum_and_patternmatching::run();
-    books::the_rust_programming_language::chapters::ch8_collections::run();
+    // books::the_rust_programming_language::chapters::ch8_collections::run();
 
     // -------------------------------
     // RUSTLINGS
@@ -50,6 +50,20 @@ fn main() {
     // books::the_rust_programming_language::excercises::sol_04_primitive_types::primitive_types4::run();
     // books::the_rust_programming_language::excercises::sol_04_primitive_types::primitive_types5::run();
     // books::the_rust_programming_language::excercises::sol_04_primitive_types::primitive_types6::run();
+
+    // 05_vecs
+    // books::the_rust_programming_language::excercises::sol_05_vecs::vec1::run();
+    // books::the_rust_programming_language::excercises::sol_05_vecs::vec2::run();
+
+    // 06_move_semantics
+    // books::the_rust_programming_language::excercises::sol_06_move::move1::run();
+    // books::the_rust_programming_language::excercises::sol_06_move::move2::run();
+    // books::the_rust_programming_language::excercises::sol_06_move::move3::run();
+    // books::the_rust_programming_language::excercises::sol_06_move::move4::run();
+    // books::the_rust_programming_language::excercises::sol_06_move::move5::run();
+
+    // 07_structs
+    // books::the_rust_programming_language::excercises::sol_07_structs::structs1::run();
 
     // -------------------------------
     // RUST BY EXAMPLE

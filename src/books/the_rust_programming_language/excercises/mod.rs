@@ -3,3 +3,6 @@ pub mod sol_01_variables;
 pub mod sol_02_functions;
 pub mod sol_03_if;
 pub mod sol_04_primitive_types;
+pub mod sol_05_vecs;
+pub mod sol_06_move;
+pub mod sol_07_structs;
