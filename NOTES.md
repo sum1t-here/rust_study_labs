@@ -856,4 +856,208 @@ fn describe_cents(coin: Coin) -> Option<String> {
 - **let-else** for early-return guard patterns
 ---
 
+# Rust Generics, Traits & Lifetimes - Key Notes
+
+## Generics
+
+### Generic Functions with Trait Bounds
+```rust
+fn largest<T: PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+    largest
+}
+```
+- `T: PartialOrd` is a **trait bound** - restricts `T` to types that can be compared
+- Enables code reuse across different types (numbers, chars, etc.)
+
+## Traits (Similar to Interfaces)
+
+### Defining a Trait
+```rust
+pub trait Summary {
+    fn summarize(&self) -> String {
+        String::from("(Read more...)")  // Default implementation
+    }
+}
+```
+
+### Implementing a Trait
+```rust
+impl Summary for SocialPost {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+```
+
+### Traits as Parameters
+
+**Syntactic Sugar:**
+```rust
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+```
+
+**Trait Bound (Full Syntax):**
+```rust
+pub fn notify<T: Summary>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
+```
+
+### Multiple Trait Bounds
+```rust
+// Multiple traits with +
+pub fn notify<T: Summary + Display>(item: &T) { }
+
+// Alternative syntax
+pub fn notify(item: &(impl Summary + Display)) { }
+
+// where clause for complex bounds (cleaner)
+fn some_function<T, U>(t: &T, u: &U) -> i32
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+{
+    // function body
+}
+```
+
+## Lifetimes
+
+### Why Lifetimes?
+Prevent **dangling references** - references that point to invalid memory.
+
+### Lifetime Error Example
+```rust
+// ❌ WRONG
+let r;
+{
+    let x = 5;
+    r = &x;  // ERROR: x will be dropped, r becomes dangling
+}
+println!("r: {r}");  // r points to deallocated memory
+
+// ✅ CORRECT
+let x = 5;
+let r = &x;  // Both live in same scope
+println!("r: {r}");  // Valid - x is still alive
+```
+
+### Lifetime Annotations
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+```
+- `'a` is a **lifetime parameter** - tells Rust that the returned reference lives as long as the shorter of `x` or `y`
+- All references with `'a` must live at least as long as `'a`
+
+### Lifetime in Structs
+```rust
+struct ImportantExcerpt<'a> {
+    part: &'a str,  // This reference must be valid for lifetime 'a
+}
+```
+
+### Lifetime in Methods
+```rust
+impl<'a> ImportantExcerpt<'a> {
+    fn level(&self) -> i32 {
+        3  // No lifetime needed - returns owned data
+    }
+    
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention: {}", announcement);
+        self.part  // Lifetime elision rules apply
+    }
+}
+```
+
+### The 'static Lifetime
+```rust
+let s: &'static str = "I have a static lifetime.";
+```
+- Lives for the **entire program duration**
+- String literals are `'static` by default
+- Use sparingly - most references don't need to be static
+
+## Combining Generics, Traits & Lifetimes
+```rust
+fn longest_with_an_announcement<'a, T>(
+    x: &'a str, 
+    y: &'a str, 
+    ann: T
+) -> &'a str 
+where 
+    T: Display 
+{
+    println!("Announcement! {ann}");
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+## Lifetime Elision Rules (Automatic)
+Compiler can infer lifetimes in simple cases:
+
+1. Each parameter gets its own lifetime
+2. If one input lifetime, it's assigned to all outputs
+3. If `&self` or `&mut self` exists, its lifetime goes to all outputs
+
+```rust
+// You write:
+fn first_word(s: &str) -> &str { }
+
+// Compiler infers:
+fn first_word<'a>(s: &'a str) -> &'a str { }
+```
+
+## Key Takeaways
+
+### Generics
+- Enable code reuse across types
+- Use trait bounds (`T: Trait`) to restrict generic types
+- Zero runtime cost (monomorphization)
+
+### Traits
+- Define shared behavior
+- Default implementations available
+- Use `impl Trait` or `<T: Trait>` for parameters
+- `where` clause for complex bounds
+
+### Lifetimes
+- Prevent dangling references at compile time
+- `'a` syntax connects reference lifetimes
+- `'static` for program-duration references
+- Usually inferred, explicit only when needed
+
+## Common Patterns
+
+**Trait Objects (Dynamic Dispatch):**
+```rust
+fn notify(item: &dyn Summary) {  // Runtime polymorphism
+    println!("{}", item.summarize());
+}
+```
+
+**Returning Traits:**
+```rust
+fn returns_summarizable() -> impl Summary {
+    NewsArticle { /* ... */ }
+}
+```
+
+**Trait Inheritance:**
+```rust
+trait OutlinePrint: Display {  // Requires Display
+    fn outline_print(&self) { }
+}
+```
+---
 *More chapters and notes will be added as I progress through the book...*

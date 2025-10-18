@@ -72,6 +72,37 @@ pub fn notify(item: &impl Summary) {
 //     U: Clone + Debug,
 // {
 
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+
+// Lifetime Annotations in Method Definitions
+// impl<'a> ImportantExcerpt<'a> {
+//     fn level(&self) -> i32 {
+//         3
+//     }
+// }
+
+// The Static Lifetime
+// One special lifetime we need to discuss is 'static,
+// which denotes that the affected reference can live
+// for the entire duration of the programecial lifetime
+// we need to discuss is 'static, which denotes that the
+// affected reference can live for the entire duration of the program
+
+// let s: &'static str = "I have a static lifetime.";
+
+use std::fmt::Display;
+// Generic Type Parameters, Trait Bounds, and Lifetimes Together
+fn longest_with_an_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str where T: Display {
+    println!("Announcement! {ann}");
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
 pub fn run() {
     let number_list = vec![34, 50, 25, 100, 65];
 
@@ -104,4 +135,25 @@ pub fn run() {
 
     println!("New article available! {}", article.summarize());
     notify(&post);
+
+    // lifetime
+
+    // ❌ Example showing a lifetime error
+    // let r;                  // `r` is declared here but not yet assigned — its lifetime starts
+    // {
+    //     let x = 5;          // `x` is created inside this inner block — its lifetime starts here
+    //     r = &x;             // ❌ ERROR: `r` borrows `x`, but `x` will be dropped at the end of this block
+    // }                       // `x` goes out of scope — `r` now points to invalid memory
+    // println!("r: {r}");     // would cause a dangling reference if allowed
+
+    // ✅ Fixed version — same lifetime scope
+    let x = 5; // `x` is created here
+    let r = &x; // `r` borrows `x`; both live in the same (outer) scope
+    println!("r: {r}"); // valid — `x` is still alive when used through `r`
+
+    let string1 = String::from("abcd");
+    let string2 = "xyz";
+
+    let result = longest(string1.as_str(), string2);
+    println!("The longest string is {result}");
 }
