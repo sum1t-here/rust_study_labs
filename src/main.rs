@@ -16,6 +16,8 @@ fn main() {
     // books::the_rust_programming_language::chapters::ch5_structs_and_methods::run();
     // books::the_rust_programming_language::chapters::ch6_enum_and_patternmatching::run();
     // books::the_rust_programming_language::chapters::ch8_collections::run();
+    // books::the_rust_programming_language::chapters::ch9_error_handling::run();
+    books::the_rust_programming_language::chapters::ch10_generic_traits_lifetimes::run();
 
     // -------------------------------
     // RUSTLINGS
