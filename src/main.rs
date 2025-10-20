@@ -1,3 +1,9 @@
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#![allow(unused_imports)]
+#![allow(unused_mut)]
+#![allow(unused_must_use)]
+
 mod books;
 
 fn main() {
@@ -17,7 +23,7 @@ fn main() {
     // books::the_rust_programming_language::chapters::ch6_enum_and_patternmatching::run();
     // books::the_rust_programming_language::chapters::ch8_collections::run();
     // books::the_rust_programming_language::chapters::ch9_error_handling::run();
-    books::the_rust_programming_language::chapters::ch10_generic_traits_lifetimes::run();
+    // books::the_rust_programming_language::chapters::ch10_generic_traits_lifetimes::run();
 
     // -------------------------------
     // RUSTLINGS
@@ -66,6 +72,14 @@ fn main() {
 
     // 07_structs
     // books::the_rust_programming_language::excercises::sol_07_structs::structs1::run();
+
+    // 08_enums
+    // books::the_rust_programming_language::excercises::sol_08_enums::enums1::run();
+    // books::the_rust_programming_language::excercises::sol_08_enums::enums2::run();
+
+    // 09_strings
+    // books::the_rust_programming_language::excercises::sol_09_strings::strings2::run();
+    books::the_rust_programming_language::excercises::sol_09_strings::strings4::run();
 
     // -------------------------------
     // RUST BY EXAMPLE

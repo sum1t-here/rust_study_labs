@@ -6,3 +6,5 @@ pub mod sol_04_primitive_types;
 pub mod sol_05_vecs;
 pub mod sol_06_move;
 pub mod sol_07_structs;
+pub mod sol_08_enums;
+pub mod sol_09_strings;
