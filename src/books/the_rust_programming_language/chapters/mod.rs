@@ -7,3 +7,4 @@ pub mod ch6_enum_and_patternmatching;
 pub mod ch8_collections;
 pub mod ch9_error_handling;
 pub mod ch10_generic_traits_lifetimes;
+pub mod ch11_automated_tests;

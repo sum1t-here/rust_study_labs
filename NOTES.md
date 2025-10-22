@@ -1060,4 +1060,89 @@ trait OutlinePrint: Display {  // Requires Display
 }
 ```
 ---
+
+# Rust Module Scope & `super` Keyword Guide
+
+## Understanding Module Hierarchy
+
+### Example Project Structure
+```
+crate (root)
+ ├── main.rs
+ └── books/
+      ├── mod.rs
+      └── the_rust_programming_language/
+           ├── mod.rs
+           └── excercises/
+                ├── mod.rs
+                └── sol_09_strings/
+                     ├── mod.rs
+                     └── strings4.rs
+```
+
+## The `super` Keyword
+
+`super` is **not global** — it only works inside a module to refer to its **parent module**.
+
+### Navigation Rules
+
+| From `strings4.rs` | Code | Goes To |
+|-------------------|------|---------|
+| Parent module | `use super::*;` | `sol_09_strings` |
+| Grandparent | `use super::super::*;` | `excercises` |
+| Root | `use crate::books;` | `main.rs` level |
+
+## Practical Example
+
+### File: `sol_09_strings/mod.rs`
+```rust
+pub mod strings4;
+
+pub fn print_header() {
+    println!("Running Strings Section!");
+}
+```
+
+### File: `sol_09_strings/strings4.rs`
+```rust
+pub fn run() {
+    super::print_header(); // 👈 Calls parent module's function
+    println!("Running strings4!");
+}
+```
+
+**Output:**
+```
+Running Strings Section!
+Running strings4!
+```
+
+## Why `super` Doesn't Work in `main.rs`
+
+`main.rs` is the **crate root** — it has no parent module. Instead, use absolute paths:
+
+```rust
+// Option 1: Direct path
+books::the_rust_programming_language::excercises::sol_09_strings::strings4::run();
+
+// Option 2: Explicit crate prefix (same thing)
+crate::books::the_rust_programming_language::excercises::sol_09_strings::strings4::run();
+```
+
+## Quick Reference Table
+
+| Context | What to Use | Meaning |
+|---------|-------------|---------|
+| Inside submodule | `super::something()` | Access parent module |
+| Deeply nested | `super::super::something()` | Go up two levels |
+| From root (`main.rs`/`lib.rs`) | `crate::something()` or just `something()` | Access from root |
+| Same module | `self::something()` or `use super::*` | Access current scope/parent |
+
+## Key Takeaways
+
+1. **`super` is relative** — it navigates up the module tree
+2. **`crate` is absolute** — it always starts from the root
+3. **Root modules have no parent** — `super` is meaningless in `main.rs`/`lib.rs`
+4. **Use absolute paths from root** — clearer and avoids confusion
+---
 *More chapters and notes will be added as I progress through the book...*
