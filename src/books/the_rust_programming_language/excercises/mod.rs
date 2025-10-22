@@ -8,3 +8,7 @@ pub mod sol_06_move;
 pub mod sol_07_structs;
 pub mod sol_08_enums;
 pub mod sol_09_strings;
+pub mod sol_10_modules;
+pub mod sol_11_hashmaps;
+pub mod sol_12_options;
+pub mod sol_13_error_handling;
