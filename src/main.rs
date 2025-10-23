@@ -94,8 +94,15 @@ fn main() {
     // RL::sol_10_modules::modules3::run();
 
     // 13_error_handling
-    RL::sol_13_error_handling::errors3::run();
-    RL::sol_13_error_handling::errors5::run();
+    // RL::sol_13_error_handling::errors3::run();
+    // RL::sol_13_error_handling::errors5::run();
+
+    // 14_generics
+    // RL::sol_14_generics::generics1::run();
+
+    // 16_lifetimes
+    // RL::sol_16_lifetimes::lifetimes2::run();
+    // RL::sol_16_lifetimes::lifetimes3::run();
 
     // -------------------------------
     // RUST BY EXAMPLE

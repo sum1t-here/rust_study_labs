@@ -12,3 +12,7 @@ pub mod sol_10_modules;
 pub mod sol_11_hashmaps;
 pub mod sol_12_options;
 pub mod sol_13_error_handling;
+pub mod sol_14_generics;
+pub mod sol_15_traits;
+pub mod sol_16_lifetimes;
+pub mod sol_17_tests;
