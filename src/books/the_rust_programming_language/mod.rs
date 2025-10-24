@@ -1,2 +1,2 @@
 pub mod chapters;
-pub mod excercises;
+pub mod rustlings;

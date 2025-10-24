@@ -12,7 +12,7 @@ mod books;
 // RL -> Rustlings
 
 use books::the_rust_programming_language::chapters as TRPL;
-use books::the_rust_programming_language::excercises as RL;
+use books::the_rust_programming_language::rustlings as RL;
 fn main() {
     println!("🦀 Rust Study Labs");
     println!("==================");
