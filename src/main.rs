@@ -31,10 +31,12 @@ fn main() {
     // TRPL::ch8_collections::run();
     // TRPL::ch9_error_handling::run();
     // TRPL::ch10_generic_traits_lifetimes::run();
+    TRPL::ch12_grep::main();
 
     // -------------------------------
     // RUSTLINGS
     // -------------------------------
+
     // 00_intro
     // RL::sol_00_intro::intro2::run();
 
