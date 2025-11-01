@@ -1145,4 +1145,330 @@ crate::books::the_rust_programming_language::excercises::sol_09_strings::strings
 3. **Root modules have no parent** — `super` is meaningless in `main.rs`/`lib.rs`
 4. **Use absolute paths from root** — clearer and avoids confusion
 ---
+
+# Closures and Iterators in Rust
+
+### Closures
+
+**Closures** are anonymous functions that can capture variables from their surrounding environment. They're defined using the `|params|` syntax.
+
+**Basic Syntax:**
+```rust
+let closure = |param| param + 1;
+let add = |a, b| a + b;
+```
+
+**Key Features:**
+- Type inference (usually don't need explicit type annotations)
+- Can capture values from their environment
+- More flexible than regular functions for short, context-specific operations
+
+**Capturing Values:**
+
+Closures can capture environment values in three ways:
+
+1. **Immutable borrow** - Just reads the value
+   ```rust
+   let list = vec![1, 2, 3];
+   let print_list = || println!("{:?}", list); // borrows immutably
+   ```
+
+2. **Mutable borrow** - Modifies the value
+   ```rust
+   let mut list = vec![1, 2, 3];
+   let mut add_item = || list.push(4); // borrows mutably
+   ```
+
+3. **Takes ownership** - Uses `move` keyword
+   ```rust
+   let list = vec![1, 2, 3];
+   thread::spawn(move || println!("{:?}", list)); // moves ownership
+   ```
+
+**Closure Traits:**
+
+Closures automatically implement one or more of these traits based on how they capture values:
+
+- **`FnOnce`** - Consumes captured values (can be called only once)
+- **`FnMut`** - Mutates captured values (can be called multiple times with `&mut`)
+- **`Fn`** - Borrows immutably (can be called multiple times safely)
+
+**Rule:** Every closure implements `FnOnce`. If it doesn't move values, it also implements `FnMut`. If it neither moves nor mutates, it also implements `Fn`.
+
+### Iterators
+
+**Iterators** provide a way to process sequences of elements efficiently and expressively.
+
+**Creating Iterators:**
+```rust
+let v = vec![1, 2, 3];
+let iter = v.iter();        // immutable references
+let iter_mut = v.iter_mut(); // mutable references
+let into_iter = v.into_iter(); // takes ownership
+```
+
+**Common Iterator Methods:**
+
+**Consuming adaptors** (consume the iterator):
+- `.sum()` - Sums all elements
+- `.collect()` - Converts iterator into a collection
+- `.for_each()` - Executes closure on each element
+
+**Iterator adaptors** (transform iterators into other iterators):
+- `.map(|x| ...)` - Transforms each element
+- `.filter(|x| ...)` - Keeps elements matching a condition
+- `.take(n)` - Takes first n elements
+- `.skip(n)` - Skips first n elements
+
+**Example - Chaining Iterators:**
+```rust
+let v: Vec<i32> = vec![1, 2, 3, 4, 5];
+let result: Vec<i32> = v.iter()
+    .filter(|x| *x % 2 == 0)  // keep even numbers
+    .map(|x| x * 2)            // double them
+    .collect();                // [4, 8]
+```
+
+**Why Use Iterators?**
+- Zero-cost abstraction (as fast as manual loops)
+- More expressive and functional style
+- Chainable operations
+- Less prone to off-by-one errors
+- Easier to parallelize
+___
+
+# Smart Pointers in Rust
+
+**Smart pointers** are data structures that act like pointers but have additional metadata and capabilities. They implement the `Deref` and `Drop` traits, allowing them to behave like references while providing extra functionality.
+
+---
+
+### Common Smart Pointers
+
+#### 1. `Box<T>` - Heap Allocation
+
+**Purpose:** Store data on the heap instead of the stack.
+
+**Use Cases:**
+- When type size can't be known at compile time (e.g., recursive types)
+- When you have large data and want to transfer ownership without copying
+- When you need trait objects (care about trait implementation, not concrete type)
+
+**Example:**
+```rust
+let b = Box::new(5); // stores 5 on the heap
+```
+
+**Enabling Recursive Types:**
+```rust
+enum List {
+    Cons(i32, Box<List>),  // Box breaks the infinite size cycle
+    Nil,
+}
+
+let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));
+```
+
+---
+
+#### 2. `Rc<T>` - Reference Counting
+
+**Purpose:** Enable multiple ownership of the same data (single-threaded only).
+
+**Key Features:**
+- Keeps track of the number of references to a value
+- Value is cleaned up when reference count reaches 0
+- Only allows immutable borrows
+
+**Example:**
+```rust
+use std::rc::Rc;
+
+let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+let b = Cons(3, Rc::clone(&a));  // increases ref count
+let c = Cons(4, Rc::clone(&a));  // increases ref count again
+
+println!("count = {}", Rc::strong_count(&a)); // prints: 3
+```
+
+**Important:** Use `Rc::clone(&a)` instead of `a.clone()` - it only clones the pointer, not the data.
+
+---
+
+#### 3. `RefCell<T>` - Interior Mutability
+
+**Purpose:** Allow mutation of data even with immutable references (borrowing rules checked at runtime).
+
+**Key Characteristics:**
+- Single ownership (like `Box<T>`)
+- Allows mutable borrows checked at **runtime** (not compile time)
+- Single-threaded only
+- Can mutate value inside `RefCell<T>` even when `RefCell<T>` itself is immutable
+
+**Methods:**
+- `.borrow()` - returns immutable reference
+- `.borrow_mut()` - returns mutable reference
+- Panics at runtime if borrowing rules violated
+
+**Example:**
+```rust
+use std::cell::RefCell;
+
+struct MockMessenger {
+    sent_messages: RefCell<Vec<String>>,
+}
+
+impl Messenger for MockMessenger {
+    fn send(&self, message: &str) {
+        // self is immutable, but we can mutate through RefCell
+        self.sent_messages.borrow_mut().push(String::from(message));
+    }
+}
+```
+
+---
+
+### Comparison Table
+
+| Type | Ownership | Borrow Checking | Use Case |
+|------|-----------|----------------|----------|
+| `Box<T>` | Single | Compile time | Heap allocation, recursive types |
+| `Rc<T>` | Multiple | Compile time (immutable only) | Shared ownership |
+| `RefCell<T>` | Single | **Runtime** | Interior mutability |
+
+---
+
+### The `Deref` Trait
+
+**Purpose:** Customize behavior of the dereference operator `*`.
+
+**Custom Implementation:**
+```rust
+use std::ops::Deref;
+
+struct MyBox<T>(T);
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+    
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+let x = 5;
+let y = MyBox::new(x);
+assert_eq!(5, *y);  // Behind the scenes: *(y.deref())
+```
+
+**Deref Coercion:**
+
+Rust automatically converts references using the `Deref` trait:
+```rust
+fn hello(name: &str) {
+    println!("Hello, {name}!");
+}
+
+let m = MyBox::new(String::from("Rust"));
+hello(&m);  // Automatically: &MyBox<String> → &String → &str
+```
+
+**Without deref coercion, you'd need:** `hello(&(*m)[..])`
+
+**Deref Coercion Rules:**
+- `&T` to `&U` when `T: Deref<Target=U>`
+- `&mut T` to `&mut U` when `T: DerefMut<Target=U>`
+- `&mut T` to `&U` when `T: Deref<Target=U>`
+
+---
+
+### The `Drop` Trait
+
+**Purpose:** Customize cleanup code when a value goes out of scope.
+
+**Example:**
+```rust
+struct CustomSmartPointer {
+    data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping with data `{}`!", self.data);
+    }
+}
+
+let c = CustomSmartPointer { data: String::from("my stuff") };
+// Drop called automatically when c goes out of scope
+```
+
+**Manual Drop:**
+```rust
+let c = CustomSmartPointer { data: String::from("data") };
+drop(c);  // drop early using std::mem::drop
+// c.drop() is NOT allowed - use drop(c) instead
+```
+
+---
+
+### Preventing Memory Leaks with `Weak<T>`
+
+**Problem:** `Rc<T>` can create reference cycles causing memory leaks.
+
+**Reference Cycle Example:**
+```rust
+// This creates a cycle: a → b → a
+// Neither can be dropped because strong_count never reaches 0
+let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
+let b = Rc::new(Cons(10, RefCell::new(Rc::clone(&a))));
+*a.tail().borrow_mut() = Rc::clone(&b);  // cycle formed!
+```
+
+**Solution - Use `Weak<T>`:**
+
+- Created with `Rc::downgrade(&rc)`
+- Increases `weak_count`, not `strong_count`
+- Doesn't prevent cleanup
+- Access via `.upgrade()` → returns `Option<Rc<T>>`
+
+**Example - Tree Structure:**
+```rust
+struct Node {
+    value: i32,
+    parent: RefCell<Weak<Node>>,      // Weak to prevent cycle
+    children: RefCell<Vec<Rc<Node>>>, // Strong ownership of children
+}
+
+let leaf = Rc::new(Node {
+    value: 3,
+    parent: RefCell::new(Weak::new()),
+    children: RefCell::new(vec![]),
+});
+
+let branch = Rc::new(Node {
+    value: 5,
+    parent: RefCell::new(Weak::new()),
+    children: RefCell::new(vec![Rc::clone(&leaf)]),
+});
+
+// Child holds weak reference to parent
+*leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+
+// Access parent through upgrade
+println!("{:?}", leaf.parent.borrow().upgrade());  // Some(Node {...})
+```
+
+**Reference Counting:**
+- `Rc::strong_count(&rc)` - counts strong references
+- `Rc::weak_count(&rc)` - counts weak references
+- Value dropped when `strong_count == 0` (regardless of `weak_count`)
+
+---
+
+### Common Combinations
+
+- **`Rc<RefCell<T>>`** - Multiple ownership with interior mutability
+- **Tree/Graph structures** - Use `Rc<T>` for children, `Weak<T>` for parent references
+- **Shared mutable state** - `Rc<RefCell<T>>` (single-threaded only)
+
 *More chapters and notes will be added as I progress through the book...*

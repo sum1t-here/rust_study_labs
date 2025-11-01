@@ -9,3 +9,5 @@ pub mod ch9_error_handling;
 pub mod ch10_generic_traits_lifetimes;
 pub mod ch11_automated_tests;
 pub mod ch12_grep;
+pub mod ch13_iterators_closures;
+pub mod ch15_smart_pointers;

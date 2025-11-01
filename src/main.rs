@@ -31,7 +31,27 @@ fn main() {
     // TRPL::ch8_collections::run();
     // TRPL::ch9_error_handling::run();
     // TRPL::ch10_generic_traits_lifetimes::run();
-    TRPL::ch12_grep::main();
+    // TRPL::ch12_grep::main();
+    // TRPL::ch13_iterators_closures::run();
+    // TRPL::ch13_iterators_closures::run2();
+    // TRPL::ch13_iterators_closures::run3();
+    // TRPL::ch13_iterators_closures::run4();
+    // TRPL::ch13_iterators_closures::run5();
+    // TRPL::ch13_iterators_closures::run6();
+    // TRPL::ch13_iterators_closures::iterator();
+    // TRPL::ch13_iterators_closures::iterator2();
+    TRPL::ch15_smart_pointers::box1();
+    TRPL::ch15_smart_pointers::box2();
+    TRPL::ch15_smart_pointers::box3();
+    TRPL::ch15_smart_pointers::box4();
+    TRPL::ch15_smart_pointers::box5();
+    TRPL::ch15_smart_pointers::box6();
+    TRPL::ch15_smart_pointers::box7();
+    TRPL::ch15_smart_pointers::box8();
+    TRPL::ch15_smart_pointers::box9();
+    TRPL::ch15_smart_pointers::box10();
+    TRPL::ch15_smart_pointers::box11();
+    TRPL::ch15_smart_pointers::box12();
 
     // -------------------------------
     // RUSTLINGS
