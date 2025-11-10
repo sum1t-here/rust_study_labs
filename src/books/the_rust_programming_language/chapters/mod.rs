@@ -11,3 +11,4 @@ pub mod ch11_automated_tests;
 pub mod ch12_grep;
 pub mod ch13_iterators_closures;
 pub mod ch15_smart_pointers;
+pub mod ch16_fearless_concurrency;

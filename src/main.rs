@@ -40,19 +40,24 @@ fn main() {
     // TRPL::ch13_iterators_closures::run6();
     // TRPL::ch13_iterators_closures::iterator();
     // TRPL::ch13_iterators_closures::iterator2();
-    TRPL::ch15_smart_pointers::box1();
-    TRPL::ch15_smart_pointers::box2();
-    TRPL::ch15_smart_pointers::box3();
-    TRPL::ch15_smart_pointers::box4();
-    TRPL::ch15_smart_pointers::box5();
-    TRPL::ch15_smart_pointers::box6();
-    TRPL::ch15_smart_pointers::box7();
-    TRPL::ch15_smart_pointers::box8();
-    TRPL::ch15_smart_pointers::box9();
-    TRPL::ch15_smart_pointers::box10();
-    TRPL::ch15_smart_pointers::box11();
-    TRPL::ch15_smart_pointers::box12();
-
+    // TRPL::ch15_smart_pointers::box1();
+    // TRPL::ch15_smart_pointers::box2();
+    // TRPL::ch15_smart_pointers::box3();
+    // TRPL::ch15_smart_pointers::box4();
+    // TRPL::ch15_smart_pointers::box5();
+    // TRPL::ch15_smart_pointers::box6();
+    // TRPL::ch15_smart_pointers::box7();
+    // TRPL::ch15_smart_pointers::box8();
+    // TRPL::ch15_smart_pointers::box9();
+    // TRPL::ch15_smart_pointers::box10();
+    // TRPL::ch15_smart_pointers::box11();
+    // TRPL::ch15_smart_pointers::box12();
+    // TRPL::ch16_fearless_concurrency::run();
+    // TRPL::ch16_fearless_concurrency::run1();
+    // TRPL::ch16_fearless_concurrency::run2();
+    // TRPL::ch16_fearless_concurrency::run3();
+    // TRPL::ch16_fearless_concurrency::run4();
+    TRPL::ch16_fearless_concurrency::run5();
     // -------------------------------
     // RUSTLINGS
     // -------------------------------
