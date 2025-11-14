@@ -13,6 +13,7 @@ mod books;
 
 use books::the_rust_programming_language::chapters as TRPL;
 use books::the_rust_programming_language::rustlings as RL;
+
 fn main() {
     println!("🦀 Rust Study Labs");
     println!("==================");
@@ -57,7 +58,15 @@ fn main() {
     // TRPL::ch16_fearless_concurrency::run2();
     // TRPL::ch16_fearless_concurrency::run3();
     // TRPL::ch16_fearless_concurrency::run4();
-    TRPL::ch16_fearless_concurrency::run5();
+    // TRPL::ch16_fearless_concurrency::run5();
+    // trpl::run(async {
+    //     TRPL::ch17_fundamentals_of_async_programming::page_title(
+    //         "https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html"
+    //     ).await;
+    // })
+    // TRPL::ch17_fundamentals_of_async_programming::run3();
+    TRPL::ch17_fundamentals_of_async_programming::run4();
+
     // -------------------------------
     // RUSTLINGS
     // -------------------------------
