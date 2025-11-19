@@ -65,7 +65,12 @@ fn main() {
     //     ).await;
     // })
     // TRPL::ch17_fundamentals_of_async_programming::run3();
-    TRPL::ch17_fundamentals_of_async_programming::run4();
+    // TRPL::ch17_fundamentals_of_async_programming::run4();
+    // TRPL::ch17_fundamentals_of_async_programming::run6();
+    // TRPL::ch17_fundamentals_of_async_programming::run7();
+    // TRPL::ch17_fundamentals_of_async_programming::run8();
+    // TRPL::ch17_fundamentals_of_async_programming::run9();
+    // TRPL::ch17_fundamentals_of_async_programming::run10();
 
     // -------------------------------
     // RUSTLINGS

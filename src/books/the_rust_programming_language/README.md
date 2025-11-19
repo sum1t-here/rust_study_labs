@@ -44,11 +44,11 @@ the-rust-programming-language/
 - [x] **Ch 12**: CLI Project (minigrep)
 
 ### Part 4: Advanced Thinking
-- [ ] **Ch 13**: Functional Features (closures, iterators)
-- [ ] **Ch 14**: Cargo and Crates.io
-- [ ] **Ch 15**: Smart Pointers (`Box`, `Rc`, `RefCell`)
-- [ ] **Ch 16**: Concurrency ⭐ (threads, message passing)
-- [ ] **Ch 17**: OOP Features
+- [x] **Ch 13**: Functional Features (closures, iterators)
+- [x] **Ch 14**: Cargo and Crates.io
+- [x] **Ch 15**: Smart Pointers (`Box`, `Rc`, `RefCell`)
+- [x] **Ch 16**: Concurrency ⭐ (threads, message passing)
+- [x] **Ch 17**: OOP Features
 
 ### Part 5: Advanced Topics
 - [ ] **Ch 18**: Patterns and Matching
