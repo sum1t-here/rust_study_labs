@@ -25,25 +25,25 @@ rust-learning/
 ├── Cargo.toml              # Root workspace configuration
 ├── src/
 │   └── main.rs             # Quick experiments and scratch code
-├── books/
-│   ├── the-rust-programming-language/
-│   │   ├── chapters/       # Chapter-by-chapter code
-│   │   ├── examples/       # Worked examples from the rustlings
-│   │   └── README.md       # Progress tracker for this book
-│   │
-│   ├── rust-by-example/
-│   │   ├── examples/       # Code examples from RBE
-│   │   └── README.md       # Progress and notes
-│   │
-│   ├── async-rust/
-│   │   ├── examples/       # Async/await examples
-│   │   ├── experiments/    # Custom async projects
-│   │   └── README.md       # Async learning progress
-│   │
-│   └── ...                 # Additional books as I progress
+│   └──books/
+│       ├── the-rust-programming-language/
+│       │   ├── chapters/       # Chapter-by-chapter code
+│       │   ├── examples/       # Worked examples from the rustlings
+│       │   └── README.md       # Progress tracker for this book
+│       │
+│       ├── rust-by-example/
+│       │   ├── examples/       # Code examples from RBE
+│       │   └── README.md       # Progress and notes
+│       │  
+│       ├── async-rust/
+│       │   ├── examples/       # Async/await examples
+│       │   ├── experiments/    # Custom async projects
+│       │   └── README.md       # Async learning progress
+│       │
+│       └── ...                 # Additional books as I progress
 │
 ├── NOTES.md                # Notes and Insights
-└── README.md               # This file
+└── readme.md               # This file
 ```
 
 ### Folder Conventions
