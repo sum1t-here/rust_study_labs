@@ -13,3 +13,5 @@ pub mod ch13_iterators_closures;
 pub mod ch15_smart_pointers;
 pub mod ch16_fearless_concurrency;
 pub mod ch17_fundamentals_of_async_programming;
+pub mod ch18_oop;
+pub mod ch19_pattern_matching;
