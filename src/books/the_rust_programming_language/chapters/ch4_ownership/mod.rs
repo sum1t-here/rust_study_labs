@@ -111,3 +111,13 @@ pub fn run3() {
     let word = first_word(my_string_literal);
     println!("{}", word);
 }
+
+// &str is a string slice — it can point to anywhere: a string literal in binary, a slice of a heap String, anywhere.
+// &String only accepts a String on the heap.
+// So &str is more flexible — it accepts both. That's why it's the preferred function parameter. If your function takes &str, anyone can call it with a String or a literal. If it takes &String, only String owners can call it.
+
+// first_word(&my_string) — my_string is a String, so &my_string is a &String
+// first_word(my_string_literal) — my_string_literal is already a &str
+
+// Both work because Rust automatically coerces &String into &str. This is called deref coercion.
+// So you used both — but the function only accepts &str. Rust handled the conversion silently.

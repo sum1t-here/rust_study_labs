@@ -70,7 +70,7 @@ the-rust-programming-language/
 
 ## 🎯 Goals
 
-- [ ] Master ownership and borrowing
+- [x] Master ownership and borrowing
 - [ ] Write safe concurrent code
 - [ ] Understand lifetimes intuitively
 - [ ] Complete all three projects
